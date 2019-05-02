@@ -1,0 +1,115 @@
+﻿@model IEnumerable<Api.Models.Entities.Flight>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Oversigt over flyafgange og ankomster</h2>
+
+<head>
+   
+    
+  
+</head>
+<body>
+
+    @*Afgangslufthavn: <input type="text" id="from" onkeyup="myFunction()" placeholder="Indtast afgangsluftavnen"  />*@
+    @*Ankomstlufthavn: <input type="text" id="to" placeholder="Indtast ankomstlufthavnen" onkeyup="myFunction()" />
+       *@
+
+    <form>
+    Afgangslufthavn: <input type="text" id="from" onkeyup="myFromFunction()" placeholder="Indtast afgangslufthavn">
+    Ankomstlufthavn: <input type="text" id="to" onkeyup="myToFunction()" placeholder="Indtast ankomstlufthavn">
+    </form>
+    <table id="table" class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.AircraftType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FromLocation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ToLocation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DepartureTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ArrivalTime)
+            </th>
+            <th></th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AircraftType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FromLocation)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ToLocation)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DepartureTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ArrivalTime)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Rediger flyafgang</a> |
+
+                </td>
+            </tr>
+        }
+    </table>
+
+    <script>
+        function myFromFunction() {
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("from");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("table");
+            tr = table.getElementsByTagName("tr");
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[1];
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+    </script>
+
+    <script>
+        function myToFunction() {
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("to");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("table");
+            tr = table.getElementsByTagName("tr");
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[2];
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+    </script>
+
+</body>
+</html>
+
+

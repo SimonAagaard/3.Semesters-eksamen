@@ -1,0 +1,57 @@
+﻿@model Api.Models.Entities.Flight
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Rediger flyafgang</h2>
+
+<h3>Flyafgang med id:@Model.Id </h3>
+<h4>Fra @Model.FromLocation til @Model.ToLocation</h4>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="AircraftType" class="control-label"></label>
+                <input asp-for="AircraftType" readonly="readonly" class="form-control" />
+                <span asp-validation-for="AircraftType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FromLocation" class="control-label"></label>
+                <input asp-for="FromLocation" readonly="readonly" class="form-control" />
+                <span asp-validation-for="FromLocation" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ToLocation" class="control-label"></label>
+                <input asp-for="ToLocation" readonly="readonly" class="form-control" />
+                <span asp-validation-for="ToLocation" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DepartureTime" class="control-label"></label>
+                <input asp-for="DepartureTime" class="form-control" />
+                <span asp-validation-for="DepartureTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ArrivalTime" class="control-label"></label>
+                <input asp-for="ArrivalTime" class="form-control" />
+                <span asp-validation-for="ArrivalTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Gem" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Tilbage til oversigt</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
